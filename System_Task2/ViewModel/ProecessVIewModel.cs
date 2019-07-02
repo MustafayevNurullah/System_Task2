@@ -6,17 +6,22 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
+using System_Task2.Command;
 using System_Task2.Entity;
+using System_Task2.View;
 
 namespace System_Task2.ViewModel
 {
     public class ProecessVIewModel : BaseViewModel
     {
-        public ProecessVIewModel()
+            ConfigurationViewModel a = new ConfigurationViewModel();
+        public ProecessVIewModel(Windows windows )
         {
-            ProcessList = new ObservableCollection<ProcessEntity>();
+             ProcessList = new ObservableCollection<ProcessEntity>();
             asdasd();
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(50);
@@ -24,14 +29,22 @@ namespace System_Task2.ViewModel
             dispatcherTimer.Start();
         }
 
-
         public void asdasd()
         {
-
-            var result = Process.GetProcesses().Where(i => i.MainWindowTitle.Length > 0).ToList();
+            
+            var result = System.Diagnostics.Process.GetProcesses().Where(i => i.MainWindowTitle.Length > 0).ToList();
             
                 foreach (var item in result)
                 {
+
+                foreach ( var item1 in a.process) 
+                {
+                    if(item1==item.MainWindowTitle)
+                    {
+                        item.Kill();
+                    }
+                }      
+              
                     ProcessEntity entity = new ProcessEntity()
                     {
                         Datetime = item.StartTime,
@@ -42,10 +55,13 @@ namespace System_Task2.ViewModel
                     };
                     ProcessList.Add(entity);
                 }
-               string json = JsonConvert.SerializeObject(ProcessList);
+          
+            
+            string json = JsonConvert.SerializeObject(ProcessList);
                System.IO.File.WriteAllText("Process.json", json);
-
-            }
+           
+           
+        }
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             ProcessList.Clear();

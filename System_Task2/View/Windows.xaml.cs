@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System_Task2.ViewModel;
 
@@ -19,13 +18,14 @@ namespace System_Task2.View
     /// <summary>
     /// Interaction logic for Process.xaml
     /// </summary>
-    public partial class Process : UserControl
+    public partial class Windows : Window
     {
-        public Process(Windows window)
+
+        public Windows()
         {
             InitializeComponent();
-            ProecessVIewModel proecessVIewModel = new ProecessVIewModel(window);
-            DataContext = proecessVIewModel;
+            MainViewModel mainViewModel = new MainViewModel(this);
+            DataContext = mainViewModel;
         }
     }
 }

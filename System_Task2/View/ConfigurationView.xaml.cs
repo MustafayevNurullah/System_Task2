@@ -14,21 +14,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System_Task2.ViewModel;
 
-namespace System_Task2
+namespace System_Task2.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ConfigurationView.xaml
     /// </summary>
-    public partial class ConfigurationView : Window
+    public partial class ConfigurationView : UserControl
     {
         public ConfigurationView()
         {
             InitializeComponent();
-            ConfigurationViewModel configurationViewModel = new ConfigurationViewModel();
-            DataContext = configurationViewModel;
-
-
-
+            ConfigurationViewModel configurationView = new ConfigurationViewModel();
+            DataContext = configurationView;
         }
+
+        
     }
 }

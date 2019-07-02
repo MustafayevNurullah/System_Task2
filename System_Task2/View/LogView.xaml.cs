@@ -10,18 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System_Task2.ViewModel;
 
 namespace System_Task2.View
 {
     /// <summary>
     /// Interaction logic for LogView.xaml
     /// </summary>
-    public partial class LogView : Window
+    public partial class LogView : UserControl
     {
         public LogView()
         {
             InitializeComponent();
+            LogViewModel logViewModel = new LogViewModel();
+            DataContext = logViewModel;
         }
     }
 }

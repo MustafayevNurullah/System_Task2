@@ -13,28 +13,21 @@ namespace System_Task2.ViewModel
 {
    public class ConfigurationViewModel:BaseViewModel
     {
-
-       public  ConfigurationViewModel ()
+        public ConfigurationViewModel()
         {
-            if (File.Exists("Process.json"))
+            process = new ObservableCollection<string>
             {
-                string jsonUsers = File.ReadAllText("Users.json");
-                ProcessList = JsonConvert.DeserializeObject<ObservableCollection<ProcessEntity>>(jsonUsers);
-            }
+                "Calculator",
+                "Untitled - Paint",
+                "Untitled - NotePad"
+            };
         }
 
-        private ObservableCollection<ProcessEntity> processList;
-        public ObservableCollection<ProcessEntity> ProcessList
-        {
 
-            get => processList;
-            set
-            {
-                processList = value;
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(ProcessList)));
-            }
+        public ObservableCollection<string> process { get; }
+        
 
-        }
+
 
     }
 }
