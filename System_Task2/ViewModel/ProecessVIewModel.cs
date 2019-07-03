@@ -18,62 +18,61 @@ namespace System_Task2.ViewModel
 {
     public class ProecessVIewModel : BaseViewModel
     {
-            ConfigurationViewModel a = new ConfigurationViewModel();
-        public ProecessVIewModel(Windows windows )
+        public ProecessVIewModel(Windows windows)
         {
-             ProcessList = new ObservableCollection<ProcessEntity>();
+            ProcessList = new ObservableCollection<ProcessEntity>();
             asdasd();
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(50);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Start();
         }
-
+   
         public void asdasd()
         {
-            
+
             var result = System.Diagnostics.Process.GetProcesses().Where(i => i.MainWindowTitle.Length > 0).ToList();
-            
-                foreach (var item in result)
+
+            foreach (var item in result)
+            {
+                if(ConfigurationViewModel.process!=null)
                 {
 
-                foreach ( var item1 in a.process) 
+                foreach (var item1 in ConfigurationViewModel.process)
                 {
-                    if(item1==item.MainWindowTitle)
+                    if (item1 == item.MainWindowTitle)
                     {
                         item.Kill();
                     }
-                }      
-              
-                    ProcessEntity entity = new ProcessEntity()
-                    {
-                        Datetime = item.StartTime,
-                        Id = item.Id,
-                        Title = item.MainWindowTitle,
-                        Name = item.ProcessName
-
-                    };
-                    ProcessList.Add(entity);
                 }
-          
-            
+                }
+
+                ProcessEntity entity = new ProcessEntity()
+                {
+                    Datetime = item.StartTime,
+                    Id = item.Id,
+                    Title = item.MainWindowTitle,
+                    Name = item.ProcessName
+
+                };
+                ProcessList.Add(entity);
+            }
+            Task senderTask = Task.Run(() =>
+            {
             string json = JsonConvert.SerializeObject(ProcessList);
-               System.IO.File.WriteAllText("Process.json", json);
-           
-           
+            System.IO.File.WriteAllText("Process.json", json);
+            });
         }
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             ProcessList.Clear();
             try
             {
-
-            asdasd();
+               asdasd();
             }
             catch (Exception)
             {
 
-             
             }
         }
 

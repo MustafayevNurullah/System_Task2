@@ -15,19 +15,14 @@ namespace System_Task2.ViewModel
     {
         public ConfigurationViewModel()
         {
-            process = new ObservableCollection<string>
+            process = new List<string>
             {
                 "Calculator",
                 "Untitled - Paint",
-                "Untitled - NotePad"
             };
         }
 
-
-        public ObservableCollection<string> process { get; }
-        
-
-
+        public static List<string> process { get; set; }
 
     }
 }
