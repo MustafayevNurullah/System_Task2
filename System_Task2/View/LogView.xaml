@@ -10,10 +10,17 @@
         <ListView ItemsSource="{Binding ProcessList}" Grid.Row="1" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Log"  Width="400">
+                    <GridViewColumn Header="Name"  Width="400">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Datetime"  Width="400">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Datetime}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

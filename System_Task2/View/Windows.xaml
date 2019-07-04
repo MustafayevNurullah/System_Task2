@@ -12,8 +12,9 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
         <WrapPanel>
-            <Button Command="{Binding processCommand}" Width="190" Height="30">Process</Button>
-            <Button Command="{Binding logCommand}" Width="190"  Height="30">Log File</Button>
+            <Button Command="{Binding processCommand}" Width="190" Height="30">Process
+            </Button>
+            <Button Name="Logbtn" Command="{Binding logCommand}" Width="190"  Height="30">Log File</Button>
             <Button Command="{Binding configurationCommand}" Width="190" Height="30" >Configuration</Button>
         </WrapPanel>
         <Grid Grid.Row="1" Name="Grid">

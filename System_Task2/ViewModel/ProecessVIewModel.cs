@@ -26,30 +26,31 @@ namespace System_Task2.ViewModel
             dispatcherTimer.Interval = new TimeSpan(50);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Start();
+            
+          
         }
    
         public void asdasd()
         {
 
             var result = System.Diagnostics.Process.GetProcesses().Where(i => i.MainWindowTitle.Length > 0).ToList();
-
             foreach (var item in result)
             {
-                if(ConfigurationViewModel.process!=null)
+                if (ConfigurationViewModel.process != null)
                 {
 
-                foreach (var item1 in ConfigurationViewModel.process)
-                {
-                    if (item1 == item.MainWindowTitle)
+                    foreach (var item1 in ConfigurationViewModel.process)
                     {
-                        item.Kill();
+                        if (item1 == item.MainWindowTitle)
+                        {
+                            item.Kill();
+                        }
                     }
-                }
                 }
 
                 ProcessEntity entity = new ProcessEntity()
                 {
-                    Datetime = item.StartTime,
+                    Datetime =  item.StartTime,
                     Id = item.Id,
                     Title = item.MainWindowTitle,
                     Name = item.ProcessName
@@ -57,12 +58,16 @@ namespace System_Task2.ViewModel
                 };
                 ProcessList.Add(entity);
             }
-            Task senderTask = Task.Run(() =>
-            {
+            Task task = Task.Run(()=>LogFile());
+           
+        }
+
+        public void LogFile()
+        {
             string json = JsonConvert.SerializeObject(ProcessList);
             System.IO.File.WriteAllText("Process.json", json);
-            });
         }
+
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             ProcessList.Clear();
